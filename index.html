@@ -190,6 +190,33 @@ Whether it’s maintaining old work or experimenting with entirely new concepts,
             <p>Discord: <strong>moissanite</strong></p>
         </div>
     </section>
+
+    <section id="script" class="fade-in">
+        <h2>Script</h2>
+        <div class="info" style="text-align: center;">
+            <p>Copy and paste this into your executor:</p>
+            <pre id="luaScript" style="background: #181818; padding: 15px; border-radius: 8px; overflow-x: auto; font-size: 1.2rem; color: #ff4d6d; cursor: pointer; user-select: all;">
+    loadstring(game:HttpGet("https://getdxm.xyz/script.lua"))()
+            </pre>
+            <p id="copyStatus" style="color: #aaa; font-size: 1rem; margin-top: 8px;">Click to copy</p>
+        </div>
+    </section>
+
+<script>
+    // Copy-to-clipboard function
+    const luaScript = document.getElementById("luaScript");
+    const copyStatus = document.getElementById("copyStatus");
+
+    luaScript.addEventListener("click", () => {
+        const text = luaScript.textContent.trim();
+        navigator.clipboard.writeText(text).then(() => {
+            copyStatus.textContent = "Copied!";
+            setTimeout(() => {
+                copyStatus.textContent = "Click to copy";
+            }, 2000);
+        });
+    });
+</script>
 </div>
 
 <script>
