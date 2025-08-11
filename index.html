@@ -13,12 +13,12 @@
 
     body {
         margin: 0;
-        font-family: Arial, sans-serif;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         background: linear-gradient(135deg, var(--bg1), var(--bg2));
         color: white;
         scroll-behavior: smooth;
-        animation: bgShift 6s ease-in-out infinite alternate;
-        font-size: 1.5rem; /* 2x base font size */
+        animation: bgShift 8s ease-in-out infinite alternate;
+        font-size: 1.5rem;
     }
 
     @keyframes bgShift {
@@ -31,19 +31,20 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: clamp(4rem, 10vw, 6rem); /* doubled */
+        font-size: clamp(4rem, 10vw, 6rem);
         cursor: pointer;
         user-select: none;
         letter-spacing: 4px;
-        text-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent);
+        color: var(--accent);
+        text-shadow: 0 0 25px var(--accent), 0 0 50px var(--accent);
         animation: pulse 2s infinite alternate;
         text-align: center;
         padding: 0 20px;
     }
 
     @keyframes pulse {
-        0% { text-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent); }
-        100% { text-shadow: 0 0 40px var(--accent), 0 0 80px var(--accent); }
+        0% { text-shadow: 0 0 25px var(--accent), 0 0 50px var(--accent); }
+        100% { text-shadow: 0 0 50px var(--accent), 0 0 100px var(--accent); }
     }
 
     .fade-in {
@@ -52,20 +53,20 @@
     }
 
     @keyframes fadeIn {
-        to { opacity: 1; }
+        to { opacity: 1; transform: translateY(0); }
     }
 
     #navbar {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background: rgba(46,46,46,0.95);
-        padding: 20px 40px; /* doubled */
+        background: rgba(46,46,46,0.9);
+        padding: 20px 40px;
         position: fixed;
         top: 0;
         width: 100%;
-        box-shadow: 0 0 15px rgba(0,0,0,0.6);
-        backdrop-filter: blur(4px);
+        box-shadow: 0 0 20px rgba(0,0,0,0.6);
+        backdrop-filter: blur(8px);
         z-index: 1000;
         flex-wrap: wrap;
         font-size: 1.5rem;
@@ -78,12 +79,6 @@
         text-shadow: 0 0 10px var(--accent);
     }
 
-    #navbar .nav-links {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-    }
-
     #navbar .nav-links button {
         background: none;
         border: none;
@@ -91,20 +86,53 @@
         margin-left: 30px;
         cursor: pointer;
         font-size: 1.5rem;
-        transition: color 0.3s, text-shadow 0.3s;
+        position: relative;
+        transition: color 0.3s ease;
+    }
+
+    #navbar .nav-links button::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        width: 0%;
+        height: 3px;
+        background: var(--accent);
+        transition: width 0.3s ease;
+        border-radius: 2px;
+        box-shadow: 0 0 5px var(--accent);
     }
 
     #navbar .nav-links button:hover {
         color: var(--accent);
-        text-shadow: 0 0 10px var(--accent);
+    }
+    #navbar .nav-links button:hover::after {
+        width: 100%;
     }
 
     section {
-        padding: 180px 40px 120px; /* doubled */
-        max-width: 1200px; /* slightly wider */
+        padding: 180px 40px 120px;
+        max-width: 1200px;
         margin: auto;
-        font-size: 1.5rem; /* doubled text */
-        line-height: 1.8; /* better readability */
+        font-size: 1.5rem;
+        line-height: 1.8;
+    }
+
+    section h2 {
+        color: var(--accent);
+        text-shadow: 0 0 10px var(--accent);
+        position: relative;
+        margin-bottom: 20px;
+    }
+
+    section h2::after {
+        content: "";
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: var(--accent);
+        margin-top: 8px;
+        box-shadow: 0 0 10px var(--accent);
     }
 
     .showcase, .info, .contact {
@@ -132,6 +160,31 @@
         box-shadow: 0 0 20px var(--accent);
     }
 
+    /* Script box styling */
+    .code-box {
+        background: #111;
+        padding: 20px;
+        border-radius: 10px;
+        color: var(--accent);
+        font-family: monospace;
+        font-size: 1.3rem;
+        cursor: pointer;
+        user-select: all;
+        box-shadow: 0 0 15px var(--accent);
+        transition: box-shadow 0.3s ease, transform 0.2s ease;
+    }
+
+    .code-box:hover {
+        box-shadow: 0 0 30px var(--accent);
+        transform: scale(1.02);
+    }
+
+    .copy-status {
+        color: #aaa;
+        font-size: 1rem;
+        margin-top: 10px;
+    }
+
     .contact {
         text-align: center;
         font-size: 1.8rem;
@@ -150,6 +203,7 @@
         <div class="nav-links">
             <button onclick="scrollToSection('showcase')">Showcase</button>
             <button onclick="scrollToSection('info')">Info</button>
+            <button onclick="scrollToSection('script')">Script</button>
             <button onclick="scrollToSection('contact')">Contact</button>
         </div>
     </div>
@@ -168,18 +222,27 @@
     <section id="info" class="fade-in">
         <h2>Info</h2>
         <div class="info">
-            <p><p>
+            <p>
 I’m an 18-year-old programmer with over five years of experience working primarily in <strong>Lua</strong>.<br>
 Over the years, I’ve built a variety of projects, each teaching me something new and pushing my skills further.<br>
 Some of my most notable scripts include <strong>DustWare</strong>, <strong>Oblivity</strong>, <strong>assistant.lua</strong>, and <strong>Dextromethorphan</strong>.<br><br>
-
 While these projects had their time in the spotlight, life (and new ideas) meant some of them were left untouched for over a year.<br>
 Now, I’m excited to bring them back to life — updated, improved, and ready to evolve into something even better than before.<br>
 My focus is on crafting scripts that are both functional and creative, combining technical precision with a drive to make something unique.<br><br>
-
 Whether it’s maintaining old work or experimenting with entirely new concepts, programming isn’t just a hobby for me — it’s something I’ve been growing with since my early teens, and I don’t plan on stopping any time soon.
-</p>
-</p>
+            </p>
+        </div>
+    </section>
+
+    <!-- Script Section -->
+    <section id="script" class="fade-in">
+        <h2>Script</h2>
+        <div style="text-align: center;">
+            <p>Copy and paste this into your executor:</p>
+            <div id="luaScript" class="code-box">
+loadstring(game:HttpGet("https://getdxm.xyz/script.lua"))()
+            </div>
+            <div id="copyStatus" class="copy-status">Click to copy</div>
         </div>
     </section>
 
@@ -190,22 +253,23 @@ Whether it’s maintaining old work or experimenting with entirely new concepts,
             <p>Discord: <strong>moissanite</strong></p>
         </div>
     </section>
-
-    <section id="script" class="fade-in">
-        <h2>Script</h2>
-        <div class="info" style="text-align: center;">
-            <p>Copy and paste this into your executor:</p>
-            <pre id="luaScript" style="background: #181818; padding: 15px; border-radius: 8px; overflow-x: auto; font-size: 1.2rem; color: #ff4d6d; cursor: pointer; user-select: all;">
-    loadstring(game:HttpGet("https://getdxm.xyz/script.lua"))()
-            </pre>
-            <p id="copyStatus" style="color: #aaa; font-size: 1rem; margin-top: 8px;">Click to copy</p>
-        </div>
-    </section>
+</div>
 
 <script>
-    // Copy-to-clipboard function
+    const landing = document.getElementById("landing");
+    const mainContent = document.getElementById("mainContent");
     const luaScript = document.getElementById("luaScript");
     const copyStatus = document.getElementById("copyStatus");
+
+    landing.addEventListener("click", () => {
+        landing.style.display = "none";
+        mainContent.style.display = "block";
+        window.scrollTo(0, 0);
+    });
+
+    function scrollToSection(id) {
+        document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+    }
 
     luaScript.addEventListener("click", () => {
         const text = luaScript.textContent.trim();
@@ -217,22 +281,5 @@ Whether it’s maintaining old work or experimenting with entirely new concepts,
         });
     });
 </script>
-</div>
-
-<script>
-    const landing = document.getElementById("landing");
-    const mainContent = document.getElementById("mainContent");
-
-    landing.addEventListener("click", () => {
-        landing.style.display = "none";
-        mainContent.style.display = "block";
-        window.scrollTo(0, 0);
-    });
-
-    function scrollToSection(id) {
-        document.getElementById(id).scrollIntoView({ behavior: "smooth" });
-    }
-</script>
-
 </body>
 </html>
