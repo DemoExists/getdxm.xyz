@@ -5,12 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>dextromethorphan</title>
 <style>
+    :root {
+        --accent: #ff4d6d; /* Light red accent */
+        --bg1: #1e1e1e;
+        --bg2: #252525;
+    }
+
     body {
         margin: 0;
         font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #1e1e1e, #252525);
+        background: linear-gradient(135deg, var(--bg1), var(--bg2));
         color: white;
         scroll-behavior: smooth;
+        animation: bgShift 6s ease-in-out infinite alternate;
+    }
+
+    /* Animated background gradient loop */
+    @keyframes bgShift {
+        0% { background: linear-gradient(135deg, var(--bg1), var(--bg2)); }
+        100% { background: linear-gradient(135deg, var(--bg2), #181818); }
     }
 
     /* Landing screen */
@@ -19,17 +32,19 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 3rem;
+        font-size: clamp(2rem, 5vw, 3rem);
         cursor: pointer;
         user-select: none;
         letter-spacing: 2px;
-        text-shadow: 0 0 10px #00b894, 0 0 20px #00b894;
+        text-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent);
         animation: pulse 2s infinite alternate;
+        text-align: center;
+        padding: 0 10px;
     }
 
     @keyframes pulse {
-        0% { text-shadow: 0 0 10px #00b894, 0 0 20px #00b894; }
-        100% { text-shadow: 0 0 20px #00b894, 0 0 40px #00b894; }
+        0% { text-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent); }
+        100% { text-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent); }
     }
 
     /* Fade-in animation for main content */
@@ -55,13 +70,20 @@
         box-shadow: 0 0 15px rgba(0,0,0,0.6);
         backdrop-filter: blur(4px);
         z-index: 1000;
+        flex-wrap: wrap;
     }
 
     #navbar h1 {
         margin: 0;
         font-size: 1.3rem;
-        color: #00b894;
-        text-shadow: 0 0 5px #00b894;
+        color: var(--accent);
+        text-shadow: 0 0 5px var(--accent);
+    }
+
+    #navbar .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
     }
 
     #navbar .nav-links button {
@@ -75,8 +97,8 @@
     }
 
     #navbar .nav-links button:hover {
-        color: #00b894;
-        text-shadow: 0 0 5px #00b894;
+        color: var(--accent);
+        text-shadow: 0 0 5px var(--accent);
     }
 
     /* Sections */
@@ -96,7 +118,7 @@
 
     .showcase:hover, .info:hover, .contact:hover {
         transform: translateY(-4px);
-        box-shadow: 0 0 15px rgba(0, 184, 148, 0.6);
+        box-shadow: 0 0 15px var(--accent);
     }
 
     .showcase img {
@@ -108,7 +130,7 @@
 
     .showcase img:hover {
         transform: scale(1.02);
-        box-shadow: 0 0 10px rgba(0, 184, 148, 0.6);
+        box-shadow: 0 0 10px var(--accent);
     }
 
     .contact {
