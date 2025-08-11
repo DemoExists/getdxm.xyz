@@ -1,82 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>dxm</title>
-    <style>
-        body {
-            background-color: #1e1e1e;
-            font-family: Arial, sans-serif;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>dextromethorphan</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #1e1e1e;
+        color: white;
+    }
 
-        .menu {
-            background: #2e2e2e;
-            padding: 25px;
-            border-radius: 12px;
-            width: 350px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-            text-align: center;
-        }
+    /* Landing screen */
+    #landing {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2.5rem;
+        cursor: pointer;
+        user-select: none;
+    }
 
-        h1 {
-            margin-bottom: 5px;
-        }
+    /* Navbar */
+    #navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #2e2e2e;
+        padding: 10px 20px;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
 
-        .tagline {
-            color: #bbb;
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
+    #navbar h1 {
+        margin: 0;
+        font-size: 1.2rem;
+    }
 
-        .preview {
-            background: #3e3e3e;
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            text-align: left;
-        }
+    #navbar .nav-links button {
+        background: none;
+        border: none;
+        color: white;
+        margin-left: 15px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: color 0.2s;
+    }
 
-        .preview ul {
-            padding-left: 20px;
-        }
+    #navbar .nav-links button:hover {
+        color: #00b894;
+    }
 
-        button {
-            background-color: #00b894;
-            color: white;
-            border: none;
-            padding: 12px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 6px;
-            transition: background-color 0.2s;
-            width: 100%;
-        }
+    /* Sections */
+    section {
+        padding: 80px 20px;
+        max-width: 900px;
+        margin: auto;
+    }
 
-        button:hover {
-            background-color: #019875;
-        }
-    </style>
+    .showcase {
+        background: #3e3e3e;
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .showcase img {
+        max-width: 100%;
+        border-radius: 6px;
+        margin: 10px 0;
+    }
+
+    .info {
+        background: #2e2e2e;
+        border-radius: 8px;
+        padding: 20px;
+    }
+
+    .contact {
+        text-align: center;
+        background: #3e3e3e;
+        border-radius: 8px;
+        padding: 20px;
+    }
+</style>
 </head>
 <body>
-    <div class="menu">
-        <h1>dextromethorphan</h1>
-        <p class="tagline">Universal Humanized Aimlock & ESP</p>
 
-        <button id="buyNowBtn">Buy Now</button>
+<!-- Landing screen -->
+<div id="landing">dextromethorphan</div>
+
+<!-- Navbar + Sections (hidden until click) -->
+<div id="mainContent" style="display: none;">
+    <div id="navbar">
+        <h1>dextromethorphan</h1>
+        <div class="nav-links">
+            <button onclick="scrollToSection('showcase')">Showcase</button>
+            <button onclick="scrollToSection('info')">Info</button>
+            <button onclick="scrollToSection('contact')">Contact</button>
+        </div>
     </div>
 
-    <script>
-        document.getElementById("buyNowBtn").addEventListener("click", () => {
-            // Replace with your real purchase link
-            window.location.href = "https://yourstore.com/product-page";
-        });
-    </script>
+    <!-- Showcase Section -->
+    <section id="showcase">
+        <h2>Showcase</h2>
+        <div class="showcase">
+            <p>This is where you can add images and descriptions of your mod menu.</p>
+            <img src="https://via.placeholder.com/800x400" alt="Example Image">
+            <p>Feature description goes here...</p>
+        </div>
+    </section>
+
+    <!-- Info Section -->
+    <section id="info">
+        <h2>Info</h2>
+        <div class="info">
+            <p>Write the information about your product or project here.  
+               This section is completely customizable with your own text.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contact</h2>
+        <div class="contact">
+            <p>Discord: <strong>moissanite</strong></p>
+        </div>
+    </section>
+</div>
+
+<script>
+    const landing = document.getElementById("landing");
+    const mainContent = document.getElementById("mainContent");
+
+    landing.addEventListener("click", () => {
+        landing.style.display = "none";
+        mainContent.style.display = "block";
+    });
+
+    function scrollToSection(id) {
+        document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+    }
+</script>
+
 </body>
 </html>
