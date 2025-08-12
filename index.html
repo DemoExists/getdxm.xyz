@@ -1,278 +1,557 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>dextromethorphan</title>
-<style>
-  :root {
-    --accent: #ff4d6d;
-    --light: #121212;
-    --dark: #050505;
-    --card-bg: rgba(30, 30, 30, 0.75);
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Dextromethorphan - Lua script showcase and information" />
+  <meta name="author" content="moissanite" />
+  <title>dextromethorphan</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff4d6d'%3E%3Cpath d='M12 2L2 7v10l10 5 10-5V7l-10-5zm0 2.83l7.17 3.59v7.16L12 19.17l-7.17-3.59V8.42L12 4.83z'/%3E%3C/svg%3E" />
+  <style>
+    :root {
+      --accent: #ff5e7e;
+      --light: #3a3a3a;
+      --dark: #0a0a0a;
+      --accent-dark: #ff4d6d;
+      --card-bg: rgba(30, 30, 30, 0.85);
+      --shadow: rgba(0, 0, 0, 0.5);
+    }
 
-  body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: white;
-    background: linear-gradient(135deg, var(--light), var(--dark));
-    background-size: 200% 200%;
-    animation: bgMove 15s ease infinite;
-  }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      color: white;
+      background: linear-gradient(135deg, var(--light), var(--dark), var(--accent-dark));
+      background-size: 400% 400%;
+      animation: bgMove 12s ease infinite;
+      min-height: 100vh;
+    }
 
-  @keyframes bgMove {
-    0% { background-position: 0% 0%; }
-    100% { background-position: 100% 100%; }
-  }
+    @keyframes bgMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-  /* NAVBAR */
-  #navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 40px;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(12px);
-    box-shadow: 0 0 20px rgba(0,0,0,0.6);
-    z-index: 1000;
-    box-sizing: border-box;
-  }
-
-  #navbar h1 {
-    margin: 0;
-    font-size: 1.8rem;
-    color: var(--accent);
-    font-weight: bold;
-    text-shadow: 0 0 8px var(--accent);
-    white-space: nowrap;
-  }
-
-  .nav-links {
-    padding-right: 30px; /* extra space so last button doesn't touch scrollbar */
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .nav-links button {
-    background: none;
-    border: none;
-    color: white;
-    margin-left: 30px;
-    cursor: pointer;
-    font-size: 1.1rem;
-    position: relative;
-    transition: color 0.3s;
-    white-space: nowrap;
-  }
-
-  .nav-links button:hover {
-    color: var(--accent);
-  }
-
-  .nav-links button::after {
-    content: "";
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--accent);
-    transition: width 0.3s ease;
-  }
-
-  .nav-links button:hover::after {
-    width: 100%;
-  }
-
-  /* HERO / LANDING */
-  #landing {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 0 10px;
-    font-size: clamp(2.2rem, 8vw, 5rem);
-    font-weight: bold;
-    letter-spacing: 2px;
-    color: var(--accent);
-    text-shadow: 0 0 25px var(--accent), 0 0 50px var(--accent);
-    animation: pulse 2s infinite alternate;
-    cursor: pointer;
-    user-select: none;
-    word-break: break-word;
-  }
-
-  @keyframes pulse {
-    0% { text-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent); }
-    100% { text-shadow: 0 0 40px var(--accent), 0 0 80px var(--accent); }
-  }
-
-  /* CONTENT */
-  section {
-    padding: 140px 20px 80px;
-    max-width: 1100px;
-    margin: auto;
-  }
-
-  section h2 {
-    font-size: 2rem;
-    color: var(--accent);
-    text-shadow: 0 0 10px var(--accent);
-    margin-bottom: 20px;
-  }
-
-  .card {
-    background: var(--card-bg);
-    border-radius: 14px;
-    padding: 30px;
-    margin-bottom: 40px;
-    box-shadow: 0 0 25px rgba(0,0,0,0.4);
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 35px var(--accent);
-  }
-
-  /* Showcase image labels */
-  .showcase p {
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: var(--accent);
-    text-shadow: 0 0 8px var(--accent), 0 0 16px var(--accent);
-    margin: 0 0 10px;
-  }
-
-  .showcase img {
-    width: 100%;
-    border-radius: 10px;
-    margin-top: 10px;
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-
-  .showcase img:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 20px var(--accent);
-  }
-
-  .code-box {
-    background: #111;
-    padding: 15px;
-    border-radius: 10px;
-    color: var(--accent);
-    font-family: monospace;
-    cursor: pointer;
-    box-shadow: 0 0 15px var(--accent);
-  }
-
-  .copy-status {
-    font-size: 0.9rem;
-    margin-top: 8px;
-    color: #aaa;
-  }
-
-  /* Mobile tweaks */
-  @media (max-width: 768px) {
+    /* NAVBAR */
     #navbar {
-      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: clamp(12px, 3vw, 18px) clamp(20px, 5vw, 40px);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 2px 10px var(--shadow);
+      z-index: 1000;
+      box-sizing: border-box;
     }
+
+    #navbar h1 {
+      margin: 0;
+      font-size: clamp(1.5rem, 4vw, 1.8rem);
+      color: var(--accent);
+      font-weight: 700;
+      text-shadow: 0 0 8px var(--accent);
+      white-space: nowrap;
+    }
+
     .nav-links {
-      padding-right: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: clamp(15px, 3vw, 30px);
+      padding-right: clamp(10px, 2vw, 30px);
     }
+
     .nav-links button {
-      margin-left: 15px;
-      font-size: 1rem;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+      position: relative;
+      transition: color 0.3s ease, transform 0.2s ease;
+      white-space: nowrap;
+      padding: 5px 0;
     }
-  }
-</style>
+
+    .nav-links button:hover,
+    .nav-links button:focus {
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .nav-links button:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .nav-links button::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links button:hover::after,
+    .nav-links button:focus::after {
+      width: 100%;
+    }
+
+    /* HERO / LANDING */
+    #landing {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 clamp(10px, 3vw, 20px);
+      font-size: clamp(2rem, 7vw, 4.5rem);
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--accent);
+      text-shadow: 0 0 25px var(--accent), 0 0 50px var(--accent);
+      animation: pulse 2.5s ease-in-out infinite alternate;
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+    }
+
+    #landing::after {
+      content: "Click or press Enter to continue";
+      font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+      color: #ccc;
+      position: absolute;
+      bottom: 20px;
+      text-shadow: 0 0 5px var(--shadow);
+      animation: fade 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulse {
+      0% { text-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent); }
+      100% { text-shadow: 0 0 30px var(--accent), 0 0 60px var(--accent); }
+    }
+
+    @keyframes fade {
+      0% { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
+
+    /* CONTENT */
+    section {
+      padding: clamp(100px, 15vh, 140px) clamp(10px, 3vw, 20px) clamp(60px, 10vh, 80px);
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    section h2 {
+      font-size: clamp(1.8rem, 5vw, 2.2rem);
+      color: var(--accent);
+      text-shadow: 0 0 10px var(--accent);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .card {
+      background: linear-gradient(145deg, var(--card-bg), rgba(50, 50, 50, 0.85));
+      border-radius: 16px;
+      padding: clamp(20px, 4vw, 30px);
+      margin-bottom: 40px;
+      box-shadow: 0 4px 20px var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px var(--accent);
+    }
+
+    /* Showcase image labels */
+    .showcase p {
+      font-size: clamp(1.1rem, 3vw, 1.3rem);
+      font-weight: 600;
+      color: var(--accent);
+      text-shadow: 0 0 8px var(--accent);
+      margin: 0 0 10px;
+    }
+
+    .showcase img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-top: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: block;
+      cursor: pointer; /* Indicate clickability */
+    }
+
+    .showcase img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 20px var(--accent);
+    }
+
+    .code-box {
+      background: #1a1a1a;
+      padding: 15px;
+      border-radius: 10px;
+      color: var(--accent);
+      font-family: 'Consolas', 'Monaco', monospace;
+      cursor: pointer;
+      box-shadow: 0 0 15px var(--shadow);
+      white-space: pre-wrap;
+      word-break: break-all;
+      transition: background 0.3s ease;
+      text-align: center;
+    }
+
+    .code-box:hover,
+    .code-box:focus {
+      background: #222;
+    }
+
+    .code-box:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .copy-status {
+      font-size: clamp(0.8rem, 2vw, 0.9rem);
+      margin-top: 8px;
+      color: #ccc;
+      transition: color 0.3s ease;
+    }
+
+    /* Image Modal */
+    #imageModal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #modalImage {
+      max-width: 90%;
+      max-height: 80vh;
+      border-radius: 10px;
+      box-shadow: 0 0 20px var(--accent);
+      object-fit: contain;
+    }
+
+    #closeModal {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.7);
+      color: var(--accent);
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    #closeModal:hover,
+    #closeModal:focus {
+      background: var(--accent);
+      color: white;
+      transform: scale(1.1);
+    }
+
+    #closeModal:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      #navbar {
+        padding: clamp(10px, 3vw, 12px) clamp(10px, 3vw, 20px);
+        flex-direction: column;
+        gap: 10px;
+      }
+      .nav-links {
+        padding-right: 10px;
+        justify-content: center;
+      }
+      .nav-links button {
+        margin: 5px;
+        font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+      }
+      #landing {
+        font-size: clamp(1.8rem, 6vw, 3.5rem);
+      }
+      section {
+        padding: clamp(80px, 12vh, 100px) 10px clamp(40px, 8vh, 60px);
+      }
+      .card {
+        padding: 20px;
+      }
+      #modalImage {
+        max-width: 95%;
+        max-height: 70vh;
+      }
+      #closeModal {
+        top: 15px;
+        right: 15px;
+        width: 25px;
+        height: 25px;
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #navbar h1 {
+        font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+      }
+      .nav-links {
+        gap: 10px;
+      }
+      .nav-links button {
+        font-size: clamp(0.8rem, 2.2vw, 0.9rem);
+      }
+      #landing::after {
+        font-size: clamp(0.7rem, 2vw, 0.9rem);
+        bottom: 15px;
+      }
+      #modalImage {
+        max-width: 98%;
+        max-height: 65vh;
+      }
+      #closeModal {
+        top: 10px;
+        right: 10px;
+        width: 20px;
+        height: 20px;
+        font-size: 0.8rem;
+      }
+    }
+
+    @media (min-width: 1600px) {
+      section {
+        max-width: 1400px;
+      }
+      #navbar h1 {
+        font-size: 2rem;
+      }
+      .nav-links button {
+        font-size: 1.2rem;
+      }
+      #modalImage {
+        max-width: 80%;
+        max-height: 85vh;
+      }
+    }
+  </style>
 </head>
 <body>
-
-<div id="landing">dextromethorphan</div>
-
-<div id="mainContent" style="display: none;">
-  <div id="navbar">
-    <h1>dextromethorphan</h1>
-    <div class="nav-links">
-      <button onclick="scrollToSection('showcase')">Showcase</button>
-      <button onclick="scrollToSection('info')">Info</button>
-      <button onclick="scrollToSection('script')">Script</button>
-      <button onclick="scrollToSection('contact')">Contact</button>
-    </div>
+  <div id="landing" role="button" tabindex="0" aria-label="Click or press Enter to enter the dextromethorphan site">
+    dextromethorphan
   </div>
 
-  <section id="showcase">
-    <h2>Showcase</h2>
-    <div class="card showcase">
-      <p>Combat</p>
-      <img src="https://github.com/DemoExists/getdxm.xyz/blob/main/222.png?raw=true" alt="img" />
-    </div>
-    <div class="card showcase">
-      <p>Visuals</p>
-      <img src="https://github.com/DemoExists/getdxm.xyz/blob/main/2222.png?raw=true" alt="img" />
-    </div>
-    <div class="card showcase">
-      <p>Settings</p>
-      <img src="https://github.com/DemoExists/getdxm.xyz/blob/main/22.png?raw=true" alt="img" />
-    </div>
-  </section>
-
-  <section id="info">
-    <h2>Info</h2>
-    <div class="card">
-      <p>I’m an 18-year-old programmer with over five years of experience working primarily in <strong>Lua</strong>...</p>
-    </div>
-  </section>
-
-  <section id="script">
-    <h2>Script</h2>
-    <div class="card" style="text-align:center;">
-      <p>Copy and paste this into your executor:</p>
-      <div id="luaScript" class="code-box">
-loadstring(game:HttpGet("https://getdxm.xyz/script.lua"))()
+  <div id="mainContent" style="display: none;">
+    <nav id="navbar" aria-label="Main navigation">
+      <h1>dextromethorphan</h1>
+      <div class="nav-links">
+        <button onclick="scrollToSection('showcase')" aria-label="Go to Showcase section">Showcase</button>
+        <button onclick="scrollToSection('info')" aria-label="Go to Info section">Info</button>
+        <button onclick="scrollToSection('script')" aria-label="Go to Script section">Script</button>
+        <button onclick="scrollToSection('contact')" aria-label="Go to Contact section">Contact</button>
       </div>
-      <div id="copyStatus" class="copy-status">Click to copy</div>
-    </div>
-  </section>
+    </nav>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <div class="card" style="text-align:center;">
-      <p>Discord: <strong>moissanite</strong></p>
-    </div>
-  </section>
-</div>
+    <section id="showcase" aria-labelledby="showcase-heading">
+      <h2 id="showcase-heading">Showcase</h2>
+      <div class="card showcase">
+        <p>Combat</p>
+        <img src="https://github.com/DemoExists/getdxm.xyz/blob/main/222.png?raw=true" alt="Combat feature screenshot" loading="lazy" />
+      </div>
+      <div class="card showcase">
+        <p>Visuals</p>
+        <img src="https://github.com/DemoExists/getdxm.xyz/blob/main/2222.png?raw=true" alt="Visuals feature screenshot" loading="lazy" />
+      </div>
+      <div class="card showcase">
+        <p>Settings</p>
+        <img src="https://github.com/DemoExists/getdxm.xyz/blob/main/22.png?raw=true" alt="Settings feature screenshot" loading="lazy" />
+      </div>
+    </section>
 
-<script>
-  const landing = document.getElementById("landing");
-  const mainContent = document.getElementById("mainContent");
-  const luaScript = document.getElementById("luaScript");
-  const copyStatus = document.getElementById("copyStatus");
+    <section id="info" aria-labelledby="info-heading">
+      <h2 id="info-heading">Info</h2>
+      <div class="card">
+        <p>I’m an 18-year-old programmer with over five years of experience working primarily in <strong>Lua</strong>. My work focuses on creating high-quality scripts for gaming platforms, with an emphasis on performance and user experience.</p>
+      </div>
+    </section>
 
-  landing.addEventListener("click", () => {
-    landing.style.display = "none";
-    mainContent.style.display = "block";
-    window.scrollTo(0, 0);
-  });
+    <section id="script" aria-labelledby="script-heading">
+      <h2 id="script-heading">Script</h2>
+      <div class="card" style="text-align: center;">
+        <p>Copy and paste this into your executor:</p>
+        <div id="luaScript" class="code-box" tabindex="0" role="button" aria-label="Click or press Enter to copy Lua script">
+          loadstring(game:HttpGet("https://getdxm.xyz/script.lua"))()
+        </div>
+        <div id="copyStatus" class="copy-status">Click to copy</div>
+      </div>
+    </section>
 
-  function scrollToSection(id) {
-    document.getElementById(id).scrollIntoView({ behavior: "smooth" });
-  }
+    <section id="contact" aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Contact</h2>
+      <div class="card" style="text-align: center;">
+        <p>Discord: <strong>moissanite</strong></p>
+      </div>
+    </section>
+  </div>
 
-  luaScript.addEventListener("click", () => {
-    const text = luaScript.textContent.trim();
-    navigator.clipboard.writeText(text).then(() => {
-      copyStatus.textContent = "Copied!";
-      setTimeout(() => copyStatus.textContent = "Click to copy", 2000);
+  <!-- Image Modal -->
+  <div id="imageModal" role="dialog" aria-label="Enlarged image modal" tabindex="-1">
+    <img id="modalImage" src="" alt="Enlarged showcase image" />
+    <button id="closeModal" aria-label="Close image modal">X</button>
+  </div>
+
+  <script>
+    const landing = document.getElementById("landing");
+    const mainContent = document.getElementById("mainContent");
+    const luaScript = document.getElementById("luaScript");
+    const copyStatus = document.getElementById("copyStatus");
+    const imageModal = document.getElementById("imageModal");
+    const modalImage = document.getElementById("modalImage");
+    const closeModal = document.getElementById("closeModal");
+    const showcaseImages = document.querySelectorAll(".showcase img");
+
+    function enterSite() {
+      landing.style.display = "none";
+      mainContent.style.display = "block";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    landing.addEventListener("click", enterSite);
+    landing.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        enterSite();
+      }
     });
-  });
-</script>
+
+    function scrollToSection(id) {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+
+    function copyToClipboard() {
+      const text = luaScript.textContent.trim();
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text)
+          .then(() => {
+            copyStatus.textContent = "Copied!";
+            copyStatus.style.color = "var(--accent)";
+            setTimeout(() => {
+              copyStatus.textContent = "Click to copy";
+              copyStatus.style.color = "#ccc";
+            }, 2000);
+          })
+          .catch(() => {
+            copyStatus.textContent = "Failed to copy";
+            copyStatus.style.color = "#f66";
+            setTimeout(() => {
+              copyStatus.textContent = "Click to copy";
+              copyStatus.style.color = "#ccc";
+            }, 2000);
+          });
+      } else {
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand("copy");
+          copyStatus.textContent = "Copied!";
+          copyStatus.style.color = "var(--accent)";
+          setTimeout(() => {
+            copyStatus.textContent = "Click to copy";
+            copyStatus.style.color = "#ccc";
+          }, 2000);
+        } catch (err) {
+          copyStatus.textContent = "Failed to copy";
+          copyStatus.style.color = "#f66";
+          setTimeout(() => {
+            copyStatus.textContent = "Click to copy";
+            copyStatus.style.color = "#ccc";
+          }, 2000);
+        }
+        document.body.removeChild(textarea);
+      }
+    }
+
+    luaScript.addEventListener("click", copyToClipboard);
+    luaScript.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        copyToClipboard();
+      }
+    });
+
+    // Image Modal Functionality
+    function openModal(src, alt) {
+      modalImage.src = src;
+      modalImage.alt = alt;
+      imageModal.style.display = "flex";
+      closeModal.focus(); // Focus on close button for accessibility
+      document.body.style.overflow = "hidden"; // Prevent scrolling
+    }
+
+    function closeModalFunc() {
+      imageModal.style.display = "none";
+      document.body.style.overflow = "auto"; // Restore scrolling
+    }
+
+    showcaseImages.forEach(img => {
+      img.addEventListener("click", () => {
+        openModal(img.src, img.alt);
+      });
+      img.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openModal(img.src, img.alt);
+        }
+      });
+    });
+
+    closeModal.addEventListener("click", closeModalFunc);
+    imageModal.addEventListener("click", (e) => {
+      if (e.target === imageModal) {
+        closeModalFunc();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && imageModal.style.display === "flex") {
+        closeModalFunc();
+      }
+    });
+  </script>
 </body>
 </html>
