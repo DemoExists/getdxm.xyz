@@ -5,230 +5,150 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dextromethorphan</title>
 <style>
-  #landing {
-    max-width: 100vw;
-    overflow-wrap: break-word;
-    word-break: break-word;
-    white-space: normal;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: clamp(4rem, 10vw, 6rem);
-    cursor: pointer;
-    user-select: none;
-    letter-spacing: 4px;
-    color: var(--accent);
-    text-shadow: 0 0 25px var(--accent), 0 0 50px var(--accent);
-    animation: pulse 2s infinite alternate;
-    text-align: center;
-    padding: 0 20px;
-  }
-
-  @media (max-width: 480px) {
-    #landing {
-      font-size: clamp(2.5rem, 7vw, 3.5rem);
-      padding: 0 12px;
-      letter-spacing: 1px;
-      line-height: 1.1;
-    }
-  }
-
   :root {
     --accent: #ff4d6d;
     --light: #121212;
     --dark: #050505;
+    --card-bg: rgba(30, 30, 30, 0.75);
   }
 
   body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: white;
-    scroll-behavior: smooth;
-    font-size: 1.5rem;
-    background: linear-gradient(
-      90deg,
-      var(--light) 0%,
-      var(--light) 40%,
-      var(--dark) 60%,
-      var(--dark) 100%
-    );
-    background-size: 200% 100%;
-    animation: bgMove 15s linear infinite;
+    background: linear-gradient(135deg, var(--light), var(--dark));
+    background-size: 200% 200%;
+    animation: bgMove 15s ease infinite;
   }
 
   @keyframes bgMove {
-    0% {
-      background-position: 0% 0%;
-    }
-    100% {
-      background-position: 100% 0%;
-    }
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
   }
 
-  @keyframes pulse {
-    0% {
-      text-shadow: 0 0 25px var(--accent), 0 0 50px var(--accent);
-    }
-    100% {
-      text-shadow: 0 0 50px var(--accent), 0 0 100px var(--accent);
-    }
-  }
-
-  .fade-in {
-    animation: fadeIn 0.8s ease forwards;
-    opacity: 0;
-  }
-
-  @keyframes fadeIn {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
+  /* NAVBAR */
   #navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(46, 46, 46, 0.9);
-    padding: 20px 40px;
+    padding: 18px 40px;
     position: fixed;
     top: 0;
     width: 100%;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
     z-index: 1000;
-    flex-wrap: wrap;
-    font-size: 1.5rem;
-    box-sizing: border-box;
   }
 
   #navbar h1 {
     margin: 0;
-    font-size: 2rem;
+    font-size: 1.8rem;
     color: var(--accent);
-    text-shadow: 0 0 10px var(--accent);
+    font-weight: bold;
+    text-shadow: 0 0 8px var(--accent);
   }
 
-  #navbar .nav-links {
-    padding-right: 10px;
-  }
-
-  #navbar .nav-links button {
+  .nav-links button {
     background: none;
     border: none;
     color: white;
     margin-left: 30px;
     cursor: pointer;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     position: relative;
-    transition: color 0.3s ease;
-    white-space: nowrap;
+    transition: color 0.3s;
   }
-
-  #navbar .nav-links button::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -5px;
-    width: 0;
-    height: 3px;
-    background: var(--accent);
-    transition: width 0.3s ease;
-    border-radius: 2px;
-    box-shadow: 0 0 5px var(--accent);
-  }
-
-  #navbar .nav-links button:hover {
+  .nav-links button:hover {
     color: var(--accent);
   }
-
-  #navbar .nav-links button:hover::after {
+  .nav-links button::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+  }
+  .nav-links button:hover::after {
     width: 100%;
   }
 
-  section {
-    padding: 180px 40px 120px;
-    max-width: 1200px;
-    margin: auto;
-    font-size: 1.5rem;
-    line-height: 1.8;
+  /* HERO / LANDING */
+  #landing {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: var(--accent);
+    text-shadow: 0 0 25px var(--accent), 0 0 50px var(--accent);
+    animation: pulse 2s infinite alternate;
+    cursor: pointer;
+    user-select: none;
+  }
+  @keyframes pulse {
+    0% { text-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent); }
+    100% { text-shadow: 0 0 40px var(--accent), 0 0 80px var(--accent); }
   }
 
+  /* CONTENT */
+  section {
+    padding: 140px 20px 80px;
+    max-width: 1100px;
+    margin: auto;
+  }
   section h2 {
+    font-size: 2rem;
     color: var(--accent);
     text-shadow: 0 0 10px var(--accent);
-    position: relative;
     margin-bottom: 20px;
   }
 
-  section h2::after {
-    content: "";
-    display: block;
-    width: 80px;
-    height: 4px;
-    background: var(--accent);
-    margin-top: 8px;
-    box-shadow: 0 0 10px var(--accent);
-  }
-
-  .showcase,
-  .info,
-  .contact {
-    border-radius: 16px;
-    padding: 40px;
-    background: rgba(62, 62, 62, 0.85);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  .card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 30px;
+    margin-bottom: 40px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.4);
     transition: transform 0.3s, box-shadow 0.3s;
   }
-
-  .showcase:hover,
-  .info:hover,
-  .contact:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 0 30px var(--accent);
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 35px var(--accent);
   }
 
   .showcase img {
-    max-width: 100%;
-    border-radius: 12px;
-    margin: 20px 0;
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 15px;
     transition: transform 0.3s, box-shadow 0.3s;
   }
-
   .showcase img:hover {
-    transform: scale(1.05);
+    transform: scale(1.03);
     box-shadow: 0 0 20px var(--accent);
   }
 
   .code-box {
     background: #111;
-    padding: 20px;
+    padding: 15px;
     border-radius: 10px;
     color: var(--accent);
     font-family: monospace;
-    font-size: 1.3rem;
     cursor: pointer;
-    user-select: all;
     box-shadow: 0 0 15px var(--accent);
-    transition: box-shadow 0.3s ease, transform 0.2s ease;
   }
-
-  .code-box:hover {
-    box-shadow: 0 0 30px var(--accent);
-    transform: scale(1.02);
-  }
-
   .copy-status {
+    font-size: 0.9rem;
+    margin-top: 8px;
     color: #aaa;
-    font-size: 1rem;
-    margin-top: 10px;
-  }
-
-  .contact {
-    text-align: center;
-    font-size: 1.8rem;
   }
 </style>
 </head>
@@ -247,42 +167,32 @@
     </div>
   </div>
 
-  <section id="showcase" class="fade-in">
+  <section id="showcase">
     <h2>Showcase</h2>
-    <div class="showcase">
+    <div class="card showcase">
       <p>Combat</p>
       <img src="https://github.com/DemoExists/getdxm.xyz/blob/main/222.png?raw=true" alt="img" />
     </div>
-
-    <div class="showcase">
+    <div class="card showcase">
       <p>Visuals</p>
       <img src="https://github.com/DemoExists/getdxm.xyz/blob/main/2222.png?raw=true" alt="img" />
     </div>
-
-    <div class="showcase">
+    <div class="card showcase">
       <p>Settings</p>
       <img src="https://github.com/DemoExists/getdxm.xyz/blob/main/22.png?raw=true" alt="img" />
     </div>
   </section>
 
-  <section id="info" class="fade-in">
+  <section id="info">
     <h2>Info</h2>
-    <div class="info">
-      <p>
-        I’m an 18-year-old programmer with over five years of experience working primarily in <strong>Lua</strong>.<br />
-        Over the years, I’ve built a variety of projects, each teaching me something new and pushing my skills further.<br />
-        Some of my most notable scripts include <strong>DustWare</strong>, <strong>Oblivity</strong>, <strong>assistant.lua</strong>, and <strong>Dextromethorphan</strong>.<br /><br />
-        While these projects had their time in the spotlight, life (and new ideas) meant some of them were left untouched for over a year.<br />
-        Now, I’m excited to bring them back to life — updated, improved, and ready to evolve into something even better than before.<br />
-        My focus is on crafting scripts that are both functional and creative, combining technical precision with a drive to make something unique.<br /><br />
-        Whether it’s maintaining old work or experimenting with entirely new concepts, programming isn’t just a hobby for me — it’s something I’ve been growing with since my early teens, and I don’t plan on stopping any time soon.
-      </p>
+    <div class="card">
+      <p>I’m an 18-year-old programmer with over five years of experience working primarily in <strong>Lua</strong>...</p>
     </div>
   </section>
 
-  <section id="script" class="fade-in">
+  <section id="script">
     <h2>Script</h2>
-    <div style="text-align: center;">
+    <div class="card" style="text-align:center;">
       <p>Copy and paste this into your executor:</p>
       <div id="luaScript" class="code-box">
 loadstring(game:HttpGet("https://getdxm.xyz/script.lua"))()
@@ -291,9 +201,9 @@ loadstring(game:HttpGet("https://getdxm.xyz/script.lua"))()
     </div>
   </section>
 
-  <section id="contact" class="fade-in">
+  <section id="contact">
     <h2>Contact</h2>
-    <div class="contact">
+    <div class="card" style="text-align:center;">
       <p>Discord: <strong>moissanite</strong></p>
     </div>
   </section>
@@ -319,9 +229,7 @@ loadstring(game:HttpGet("https://getdxm.xyz/script.lua"))()
     const text = luaScript.textContent.trim();
     navigator.clipboard.writeText(text).then(() => {
       copyStatus.textContent = "Copied!";
-      setTimeout(() => {
-        copyStatus.textContent = "Click to copy";
-      }, 2000);
+      setTimeout(() => copyStatus.textContent = "Click to copy", 2000);
     });
   });
 </script>
