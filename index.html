@@ -23,26 +23,33 @@
       }
     }
     :root {
-        --accent: #ff4d6d;
-        --bg1: #1e1e1e;
-        --bg2: #252525;
+      --accent: #ff4d6d;
+      --bg1: #121212;
+      --bg2: #1c1c1c;
+      --bg3: #181818;
     }
 
     body {
-        margin: 0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(135deg, var(--bg1), var(--bg2));
-        color: white;
-        scroll-behavior: smooth;
-        animation: bgShift 8s ease-in-out infinite alternate;
-        font-size: 1.5rem;
-        /* Prevent layout shift when scrollbar appears */
-        overflow-y: scroll;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      --color1: var(--bg1);
+      --color2: var(--bg2);
+      background: linear-gradient(135deg, var(--color1), var(--color2));
+      color: white;
+      scroll-behavior: smooth;
+      animation: bgShift 8s ease-in-out infinite alternate;
+      font-size: 1.5rem;
     }
 
     @keyframes bgShift {
-        0% { background: linear-gradient(135deg, var(--bg1), var(--bg2)); }
-        100% { background: linear-gradient(135deg, var(--bg2), #181818); }
+      0% {
+        --color1: var(--bg1);
+        --color2: var(--bg2);
+      }
+      100% {
+        --color1: var(--bg2);
+        --color2: var(--bg3);
+      }
     }
 
     #landing {
