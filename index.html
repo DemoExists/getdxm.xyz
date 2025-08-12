@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>dextromethorphan</title>
 <style>
     :root {
@@ -19,6 +19,8 @@
         scroll-behavior: smooth;
         animation: bgShift 8s ease-in-out infinite alternate;
         font-size: 1.5rem;
+        /* Prevent layout shift when scrollbar appears */
+        overflow-y: scroll;
     }
 
     @keyframes bgShift {
@@ -70,6 +72,8 @@
         z-index: 1000;
         flex-wrap: wrap;
         font-size: 1.5rem;
+        /* Prevent navbar from being overlapped by scrollbar */
+        box-sizing: border-box;
     }
 
     #navbar h1 {
@@ -77,6 +81,11 @@
         font-size: 2rem;
         color: var(--accent);
         text-shadow: 0 0 10px var(--accent);
+    }
+
+    /* Add some padding-right to nav-links to avoid scrollbar overlap */
+    #navbar .nav-links {
+        padding-right: 10px;
     }
 
     #navbar .nav-links button {
@@ -88,6 +97,7 @@
         font-size: 1.5rem;
         position: relative;
         transition: color 0.3s ease;
+        white-space: nowrap;
     }
 
     #navbar .nav-links button::after {
@@ -189,6 +199,34 @@
         text-align: center;
         font-size: 1.8rem;
     }
+
+    /* Responsive adjustments for smaller devices */
+    @media (max-width: 600px) {
+        body {
+            font-size: 1rem;
+        }
+        #navbar {
+            padding: 15px 20px;
+            font-size: 1.1rem;
+        }
+        #navbar h1 {
+            font-size: 1.5rem;
+        }
+        #navbar .nav-links button {
+            margin-left: 15px;
+            font-size: 1.1rem;
+        }
+        section {
+            padding: 140px 20px 80px;
+            font-size: 1rem;
+        }
+        .showcase, .info, .contact {
+            padding: 20px;
+        }
+        .contact {
+            font-size: 1.2rem;
+        }
+    }
 </style>
 </head>
 <body>
@@ -213,7 +251,7 @@
         <h2>Showcase</h2>
         <div class="showcase">
             <p>desc.</p>
-            <img src="https://via.placeholder.com/800x400" alt="img">
+            <img src="https://via.placeholder.com/800x400" alt="img" />
             <p>Feature desc.</p>
         </div>
     </section>
@@ -223,12 +261,12 @@
         <h2>Info</h2>
         <div class="info">
             <p>
-I’m an 18-year-old programmer with over five years of experience working primarily in <strong>Lua</strong>.<br>
-Over the years, I’ve built a variety of projects, each teaching me something new and pushing my skills further.<br>
-Some of my most notable scripts include <strong>DustWare</strong>, <strong>Oblivity</strong>, <strong>assistant.lua</strong>, and <strong>Dextromethorphan</strong>.<br><br>
-While these projects had their time in the spotlight, life (and new ideas) meant some of them were left untouched for over a year.<br>
-Now, I’m excited to bring them back to life — updated, improved, and ready to evolve into something even better than before.<br>
-My focus is on crafting scripts that are both functional and creative, combining technical precision with a drive to make something unique.<br><br>
+I’m an 18-year-old programmer with over five years of experience working primarily in <strong>Lua</strong>.<br />
+Over the years, I’ve built a variety of projects, each teaching me something new and pushing my skills further.<br />
+Some of my most notable scripts include <strong>DustWare</strong>, <strong>Oblivity</strong>, <strong>assistant.lua</strong>, and <strong>Dextromethorphan</strong>.<br /><br />
+While these projects had their time in the spotlight, life (and new ideas) meant some of them were left untouched for over a year.<br />
+Now, I’m excited to bring them back to life — updated, improved, and ready to evolve into something even better than before.<br />
+My focus is on crafting scripts that are both functional and creative, combining technical precision with a drive to make something unique.<br /><br />
 Whether it’s maintaining old work or experimenting with entirely new concepts, programming isn’t just a hobby for me — it’s something I’ve been growing with since my early teens, and I don’t plan on stopping any time soon.
             </p>
         </div>
