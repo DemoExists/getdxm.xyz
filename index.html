@@ -2,324 +2,319 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>dextromethorphan</title>
 <style>
+  #landing {
+    max-width: 100vw;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: clamp(4rem, 10vw, 6rem);
+    cursor: pointer;
+    user-select: none;
+    letter-spacing: 4px;
+    color: var(--accent);
+    text-shadow: 0 0 25px var(--accent), 0 0 50px var(--accent);
+    animation: pulse 2s infinite alternate;
+    text-align: center;
+    padding: 0 20px;
+  }
 
+  @media (max-width: 480px) {
     #landing {
-        /* existing styles... */
-        max-width: 100vw;
-        overflow-wrap: break-word;
-        word-break: break-word;
-        white-space: normal;
+      font-size: clamp(2.5rem, 7vw, 3.5rem);
+      padding: 0 12px;
+      letter-spacing: 1px;
+      line-height: 1.1;
     }
+  }
 
-    @media (max-width: 480px) {
-      #landing {
-        font-size: clamp(2.5rem, 7vw, 3.5rem);
-        padding: 0 12px;
-        letter-spacing: 1px;
-        line-height: 1.1;
-      }
-    }
-    
-    :root {
-      --accent: #ff4d6d;
-      --light: #121212;  /* your base light bg */
-      --dark: #050505;   /* darker dark for stronger contrast */
-    }
+  :root {
+    --accent: #ff4d6d;
+    --light: #121212;
+    --dark: #050505;
+  }
 
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: white;
-      scroll-behavior: smooth;
-      font-size: 1.5rem;
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    scroll-behavior: smooth;
+    font-size: 1.5rem;
+    background: linear-gradient(
+      90deg,
+      var(--light) 0%,
+      var(--light) 40%,
+      var(--dark) 60%,
+      var(--dark) 100%
+    );
+    background-size: 200% 100%;
+    animation: bgMove 15s linear infinite;
+  }
 
-      /* NEW sliding gradient background */
-      background: linear-gradient(
-        90deg,
-        var(--light) 0%,
-        var(--light) 40%,
-        var(--dark) 60%,
-        var(--dark) 100%
-      );
-      background-size: 200% 100%;
-      animation: bgMove 15s linear infinite;
+  @keyframes bgMove {
+    0% {
+      background-position: 0% 0%;
     }
+    100% {
+      background-position: 100% 0%;
+    }
+  }
 
-    @keyframes bgMove {
-      0% {
-        background-position: 0% 0%;
-      }
-      100% {
-        background-position: 100% 0%;
-      }
+  @keyframes pulse {
+    0% {
+      text-shadow: 0 0 25px var(--accent), 0 0 50px var(--accent);
     }
+    100% {
+      text-shadow: 0 0 50px var(--accent), 0 0 100px var(--accent);
+    }
+  }
 
-    #landing {
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: clamp(4rem, 10vw, 6rem);
-        cursor: pointer;
-        user-select: none;
-        letter-spacing: 4px;
-        color: var(--accent);
-        text-shadow: 0 0 25px var(--accent), 0 0 50px var(--accent);
-        animation: pulse 2s infinite alternate;
-        text-align: center;
-        padding: 0 20px;
-    }
+  .fade-in {
+    animation: fadeIn 0.8s ease forwards;
+    opacity: 0;
+  }
 
-    @keyframes pulse {
-        0% { text-shadow: 0 0 25px var(--accent), 0 0 50px var(--accent); }
-        100% { text-shadow: 0 0 50px var(--accent), 0 0 100px var(--accent); }
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
+  }
 
-    .fade-in {
-        animation: fadeIn 0.8s ease forwards;
-        opacity: 0;
-    }
+  #navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(46, 46, 46, 0.9);
+    padding: 20px 40px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    flex-wrap: wrap;
+    font-size: 1.5rem;
+    box-sizing: border-box;
+  }
 
-    @keyframes fadeIn {
-        to { opacity: 1; transform: translateY(0); }
-    }
+  #navbar h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: var(--accent);
+    text-shadow: 0 0 10px var(--accent);
+  }
 
-    #navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: rgba(46,46,46,0.9);
-        padding: 20px 40px;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        box-shadow: 0 0 20px rgba(0,0,0,0.6);
-        backdrop-filter: blur(8px);
-        z-index: 1000;
-        flex-wrap: wrap;
-        font-size: 1.5rem;
-        /* Prevent navbar from being overlapped by scrollbar */
-        box-sizing: border-box;
-    }
+  #navbar .nav-links {
+    padding-right: 10px;
+  }
 
-    #navbar h1 {
-        margin: 0;
-        font-size: 2rem;
-        color: var(--accent);
-        text-shadow: 0 0 10px var(--accent);
-    }
+  #navbar .nav-links button {
+    background: none;
+    border: none;
+    color: white;
+    margin-left: 30px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    position: relative;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+  }
 
-    /* Add some padding-right to nav-links to avoid scrollbar overlap */
-    #navbar .nav-links {
-        padding-right: 10px;
-    }
+  #navbar .nav-links button::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0;
+    height: 3px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+    border-radius: 2px;
+    box-shadow: 0 0 5px var(--accent);
+  }
 
-    #navbar .nav-links button {
-        background: none;
-        border: none;
-        color: white;
-        margin-left: 30px;
-        cursor: pointer;
-        font-size: 1.5rem;
-        position: relative;
-        transition: color 0.3s ease;
-        white-space: nowrap;
-    }
+  #navbar .nav-links button:hover {
+    color: var(--accent);
+  }
 
-    #navbar .nav-links button::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: -5px;
-        width: 0%;
-        height: 3px;
-        background: var(--accent);
-        transition: width 0.3s ease;
-        border-radius: 2px;
-        box-shadow: 0 0 5px var(--accent);
-    }
+  #navbar .nav-links button:hover::after {
+    width: 100%;
+  }
 
-    #navbar .nav-links button:hover {
-        color: var(--accent);
-    }
-    #navbar .nav-links button:hover::after {
-        width: 100%;
-    }
+  section {
+    padding: 180px 40px 120px;
+    max-width: 1200px;
+    margin: auto;
+    font-size: 1.5rem;
+    line-height: 1.8;
+  }
 
-    section {
-        padding: 180px 40px 120px;
-        max-width: 1200px;
-        margin: auto;
-        font-size: 1.5rem;
-        line-height: 1.8;
-    }
+  section h2 {
+    color: var(--accent);
+    text-shadow: 0 0 10px var(--accent);
+    position: relative;
+    margin-bottom: 20px;
+  }
 
-    section h2 {
-        color: var(--accent);
-        text-shadow: 0 0 10px var(--accent);
-        position: relative;
-        margin-bottom: 20px;
-    }
+  section h2::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: var(--accent);
+    margin-top: 8px;
+    box-shadow: 0 0 10px var(--accent);
+  }
 
-    section h2::after {
-        content: "";
-        display: block;
-        width: 80px;
-        height: 4px;
-        background: var(--accent);
-        margin-top: 8px;
-        box-shadow: 0 0 10px var(--accent);
-    }
+  .showcase,
+  .info,
+  .contact {
+    border-radius: 16px;
+    padding: 40px;
+    background: rgba(62, 62, 62, 0.85);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
 
-    .showcase, .info, .contact {
-        border-radius: 16px;
-        padding: 40px;
-        background: rgba(62, 62, 62, 0.85);
-        box-shadow: 0 0 20px rgba(0,0,0,0.5);
-        transition: transform 0.3s, box-shadow 0.3s;
-    }
+  .showcase:hover,
+  .info:hover,
+  .contact:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 30px var(--accent);
+  }
 
-    .showcase:hover, .info:hover, .contact:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 0 30px var(--accent);
-    }
+  .showcase img {
+    max-width: 100%;
+    border-radius: 12px;
+    margin: 20px 0;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
 
-    .showcase img {
-        max-width: 100%;
-        border-radius: 12px;
-        margin: 20px 0;
-        transition: transform 0.3s, box-shadow 0.3s;
-    }
+  .showcase img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px var(--accent);
+  }
 
-    .showcase img:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 20px var(--accent);
-    }
+  .code-box {
+    background: #111;
+    padding: 20px;
+    border-radius: 10px;
+    color: var(--accent);
+    font-family: monospace;
+    font-size: 1.3rem;
+    cursor: pointer;
+    user-select: all;
+    box-shadow: 0 0 15px var(--accent);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+  }
 
-    /* Script box styling */
-    .code-box {
-        background: #111;
-        padding: 20px;
-        border-radius: 10px;
-        color: var(--accent);
-        font-family: monospace;
-        font-size: 1.3rem;
-        cursor: pointer;
-        user-select: all;
-        box-shadow: 0 0 15px var(--accent);
-        transition: box-shadow 0.3s ease, transform 0.2s ease;
-    }
+  .code-box:hover {
+    box-shadow: 0 0 30px var(--accent);
+    transform: scale(1.02);
+  }
 
-    .code-box:hover {
-        box-shadow: 0 0 30px var(--accent);
-        transform: scale(1.02);
-    }
+  .copy-status {
+    color: #aaa;
+    font-size: 1rem;
+    margin-top: 10px;
+  }
 
-    .copy-status {
-        color: #aaa;
-        font-size: 1rem;
-        margin-top: 10px;
-    }
-
-    .contact {
-        text-align: center;
-        font-size: 1.8rem;
-    }
-
+  .contact {
+    text-align: center;
+    font-size: 1.8rem;
+  }
 </style>
 </head>
 <body>
 
-<!-- Landing screen -->
 <div id="landing">dextromethorphan</div>
 
-<!-- Main Content -->
 <div id="mainContent" style="display: none;">
-    <div id="navbar">
-        <h1>dextromethorphan</h1>
-        <div class="nav-links">
-            <button onclick="scrollToSection('showcase')">Showcase</button>
-            <button onclick="scrollToSection('info')">Info</button>
-            <button onclick="scrollToSection('script')">Script</button>
-            <button onclick="scrollToSection('contact')">Contact</button>
-        </div>
+  <div id="navbar">
+    <h1>dextromethorphan</h1>
+    <div class="nav-links">
+      <button onclick="scrollToSection('showcase')">Showcase</button>
+      <button onclick="scrollToSection('info')">Info</button>
+      <button onclick="scrollToSection('script')">Script</button>
+      <button onclick="scrollToSection('contact')">Contact</button>
     </div>
+  </div>
 
-    <!-- Showcase Section -->
-    <section id="showcase" class="fade-in">
-        <h2>Showcase</h2>
-        <div class="showcase">
-            <p>desc.</p>
-            <img src="https://via.placeholder.com/800x400" alt="img" />
-            <p>Feature desc.</p>
-        </div>
-    </section>
+  <section id="showcase" class="fade-in">
+    <h2>Showcase</h2>
+    <div class="showcase">
+      <p>desc.</p>
+      <img src="https://via.placeholder.com/800x400" alt="img" />
+      <p>Feature desc.</p>
+    </div>
+  </section>
 
-    <!-- Info Section -->
-    <section id="info" class="fade-in">
-        <h2>Info</h2>
-        <div class="info">
-            <p>
-I’m an 18-year-old programmer with over five years of experience working primarily in <strong>Lua</strong>.<br />
-Over the years, I’ve built a variety of projects, each teaching me something new and pushing my skills further.<br />
-Some of my most notable scripts include <strong>DustWare</strong>, <strong>Oblivity</strong>, <strong>assistant.lua</strong>, and <strong>Dextromethorphan</strong>.<br /><br />
-While these projects had their time in the spotlight, life (and new ideas) meant some of them were left untouched for over a year.<br />
-Now, I’m excited to bring them back to life — updated, improved, and ready to evolve into something even better than before.<br />
-My focus is on crafting scripts that are both functional and creative, combining technical precision with a drive to make something unique.<br /><br />
-Whether it’s maintaining old work or experimenting with entirely new concepts, programming isn’t just a hobby for me — it’s something I’ve been growing with since my early teens, and I don’t plan on stopping any time soon.
-            </p>
-        </div>
-    </section>
+  <section id="info" class="fade-in">
+    <h2>Info</h2>
+    <div class="info">
+      <p>
+        I’m an 18-year-old programmer with over five years of experience working primarily in <strong>Lua</strong>.<br />
+        Over the years, I’ve built a variety of projects, each teaching me something new and pushing my skills further.<br />
+        Some of my most notable scripts include <strong>DustWare</strong>, <strong>Oblivity</strong>, <strong>assistant.lua</strong>, and <strong>Dextromethorphan</strong>.<br /><br />
+        While these projects had their time in the spotlight, life (and new ideas) meant some of them were left untouched for over a year.<br />
+        Now, I’m excited to bring them back to life — updated, improved, and ready to evolve into something even better than before.<br />
+        My focus is on crafting scripts that are both functional and creative, combining technical precision with a drive to make something unique.<br /><br />
+        Whether it’s maintaining old work or experimenting with entirely new concepts, programming isn’t just a hobby for me — it’s something I’ve been growing with since my early teens, and I don’t plan on stopping any time soon.
+      </p>
+    </div>
+  </section>
 
-    <!-- Script Section -->
-    <section id="script" class="fade-in">
-        <h2>Script</h2>
-        <div style="text-align: center;">
-            <p>Copy and paste this into your executor:</p>
-            <div id="luaScript" class="code-box">
+  <section id="script" class="fade-in">
+    <h2>Script</h2>
+    <div style="text-align: center;">
+      <p>Copy and paste this into your executor:</p>
+      <div id="luaScript" class="code-box">
 loadstring(game:HttpGet("https://getdxm.xyz/script.lua"))()
-            </div>
-            <div id="copyStatus" class="copy-status">Click to copy</div>
-        </div>
-    </section>
+      </div>
+      <div id="copyStatus" class="copy-status">Click to copy</div>
+    </div>
+  </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="fade-in">
-        <h2>Contact</h2>
-        <div class="contact">
-            <p>Discord: <strong>moissanite, miluju tě lásko <3</strong></p>
-        </div>
-    </section>
+  <section id="contact" class="fade-in">
+    <h2>Contact</h2>
+    <div class="contact">
+      <p>Discord: <strong>moissanite, miluju tě lásko &lt;3</strong></p>
+    </div>
+  </section>
 </div>
 
 <script>
-    const landing = document.getElementById("landing");
-    const mainContent = document.getElementById("mainContent");
-    const luaScript = document.getElementById("luaScript");
-    const copyStatus = document.getElementById("copyStatus");
+  const landing = document.getElementById("landing");
+  const mainContent = document.getElementById("mainContent");
+  const luaScript = document.getElementById("luaScript");
+  const copyStatus = document.getElementById("copyStatus");
 
-    landing.addEventListener("click", () => {
-        landing.style.display = "none";
-        mainContent.style.display = "block";
-        window.scrollTo(0, 0);
+  landing.addEventListener("click", () => {
+    landing.style.display = "none";
+    mainContent.style.display = "block";
+    window.scrollTo(0, 0);
+  });
+
+  function scrollToSection(id) {
+    document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+  }
+
+  luaScript.addEventListener("click", () => {
+    const text = luaScript.textContent.trim();
+    navigator.clipboard.writeText(text).then(() => {
+      copyStatus.textContent = "Copied!";
+      setTimeout(() => {
+        copyStatus.textContent = "Click to copy";
+      }, 2000);
     });
-
-    function scrollToSection(id) {
-        document.getElementById(id).scrollIntoView({ behavior: "smooth" });
-    }
-
-    luaScript.addEventListener("click", () => {
-        const text = luaScript.textContent.trim();
-        navigator.clipboard.writeText(text).then(() => {
-            copyStatus.textContent = "Copied!";
-            setTimeout(() => {
-                copyStatus.textContent = "Click to copy";
-            }, 2000);
-        });
-    });
+  });
 </script>
 </body>
 </html>
