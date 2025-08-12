@@ -22,33 +22,38 @@
         line-height: 1.1;
       }
     }
+    
     :root {
       --accent: #ff4d6d;
-      --bg1: #121212;
-      --bg2: #1c1c1c;
-      --bg3: #181818;
+      --light: #121212;  /* your base light bg */
+      --dark: #050505;   /* darker dark for stronger contrast */
     }
 
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      --color1: var(--bg1);
-      --color2: var(--bg2);
-      background: linear-gradient(135deg, var(--color1), var(--color2));
       color: white;
       scroll-behavior: smooth;
-      animation: bgShift 8s ease-in-out infinite alternate;
       font-size: 1.5rem;
+
+      /* NEW sliding gradient background */
+      background: linear-gradient(
+        90deg,
+        var(--light) 0%,
+        var(--light) 40%,
+        var(--dark) 60%,
+        var(--dark) 100%
+      );
+      background-size: 200% 100%;
+      animation: bgMove 15s linear infinite;
     }
 
-    @keyframes bgShift {
+    @keyframes bgMove {
       0% {
-        --color1: var(--bg1);
-        --color2: var(--bg2);
+        background-position: 0% 0%;
       }
       100% {
-        --color1: var(--bg2);
-        --color2: var(--bg3);
+        background-position: 100% 0%;
       }
     }
 
@@ -224,33 +229,6 @@
         font-size: 1.8rem;
     }
 
-    /* Responsive adjustments for smaller devices 
-    @media (max-width: 600px) {
-        body {
-            font-size: 1rem;
-        }
-        #navbar {
-            padding: 15px 20px;
-            font-size: 1.1rem;
-        }
-        #navbar h1 {
-            font-size: 1.5rem;
-        }
-        #navbar .nav-links button {
-            margin-left: 15px;
-            font-size: 1.1rem;
-        }
-        section {
-            padding: 140px 20px 80px;
-            font-size: 1rem;
-        }
-        .showcase, .info, .contact {
-            padding: 20px;
-        }
-        .contact {
-            font-size: 1.2rem;
-        }
-    } */
 </style>
 </head>
 <body>
