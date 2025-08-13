@@ -198,6 +198,38 @@
       box-shadow: 0 4px 20px var(--accent);
     }
 
+    /* ---- Script section styles (restored from original) ---- */
+    .code-box {
+      background: #1a1a1a;
+      padding: 15px;
+      border-radius: 10px;
+      color: var(--accent);
+      font-family: 'Consolas', 'Monaco', monospace;
+      cursor: pointer;
+      box-shadow: 0 0 15px var(--shadow);
+      white-space: pre-wrap;
+      word-break: break-all;
+      transition: background 0.3s ease;
+      text-align: center;
+    }
+
+    .code-box:hover,
+    .code-box:focus {
+      background: #222;
+    }
+
+    .code-box:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .copy-status {
+      font-size: clamp(0.8rem, 2vw, 0.9rem);
+      margin-top: 8px;
+      color: #ccc;
+      transition: color 0.3s ease;
+    }
+
     /* ===== SHOWCASE + INFO GRID (titles aligned, info matches 3 cards) ===== */
     #showcaseInfo.si-grid {
       display: grid;
